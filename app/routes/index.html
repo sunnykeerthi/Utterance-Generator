@@ -1,0 +1,73 @@
+<!Doctype>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var index = 2;
+            $("#btn").click(function (e) {
+                e.preventDefault();
+                console.log('clicked');
+
+                $("#someclass").clone().attr('name', 'txt' + index).val("").appendTo("#form-field");
+                index++;
+            });
+
+
+            $('#formData').on('keydown', function (e) {
+                //alert("Entered");
+                if (e.which == 9) {
+                    var jsonArr = [];
+
+                    var jsonData;
+                    var res = '';
+                    var formData = $("#formData").serializeArray();
+                    console.log(formData);
+
+                    $.each(formData, function () {
+
+                        console.log('$$$$$$$$');
+                        var replaceComma = this.value.replace(/,/g, '|');
+                        var replaceSpace = replaceComma.replace(/\s+/g, '');
+                        res = res + "(" + replaceSpace + ") ";
+
+
+                    });
+                    res = res.replace(/\s+$/, '');
+                    jsonArr.push({
+                        jsonData: res
+                    })
+                    $.ajax({
+                        type: "POST",
+                        url: "/notes",
+                        crossDomain: true,
+                        dataType: "json",
+                        data: {
+                            jsonArr
+                        }
+                    }).done(function (data) {
+                        alert("ajax callback response:" + JSON.stringify(data));
+                    });
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="form-header">
+        <h2>Create your Utterances</h2>
+    </div>
+    <form id="formData" name="formData" novalidate>
+        <div class="form-field" id="form-field">
+            <input class="input" id="someclass" name="text1" type="text" value="" />
+        </div>
+    </form>
+    <button id="btn" name="btn">Add a new row</button>
+
+</body>
+
+</html>
