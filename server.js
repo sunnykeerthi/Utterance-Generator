@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 8080;
+const port = 8080 || process.env.port
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var processing = require('./app/routes/process');
