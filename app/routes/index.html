@@ -46,10 +46,13 @@
                         dataType: "json",
                         data: {
                             jsonArr
-                        }
-                    }).done(function (data) {
-                        alert("ajax callback response:" + JSON.stringify(data));
-                    });
+                        },
+                        success: function (respn) {
+                            console.log(respn);
+                        },
+
+
+                    })
                 }
             });
         });

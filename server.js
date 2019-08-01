@@ -1,32 +1,20 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser').json();
 var fs = require('fs');
 var processing = require('./app/routes/process');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/notes', (req, res) => {
-    res.sendfile(__dirname + '/app/routes/index.html');
-});
 
 
-
-
-
-app.post('/notes', (req, res) => {
-    console.log(JSON.stringify(req.body.jsonArr[0].jsonData));
-    var dataToPass = { "new": req.body.jsonArr[0].jsonData }
-    console.log(dataToPass);
-
-    fs.writeFile("test.txt", processing.inputFromFrontEnd(dataToPass), function (err) {
+app.post('/notes', bodyParser, (req, res) => {
+    console.log(req.body);
+    fs.writeFile("test.txt", processing.inputFromFrontEnd(req.body), function (data, err) {
         if (err) {
             return console.log(err);
         }
-        console.log("The file was saved!");
-    });
-
+        res.send(req.body);
+    })
 });
 
 app.listen(port, () => {
