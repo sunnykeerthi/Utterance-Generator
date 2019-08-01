@@ -136,14 +136,14 @@ intentUtteranceGenerator = function (intents) {
 }
 
 
-module.exports.inputFromFrontEnd = function (inpData) {
+module.exports.inputFromFrontEnd = function (inpData, callback) {
     console.log('Exportes' + inpData);
     var inputData = inpData;
     intents.forEach((value, key) => {
         var lines = value.split("\n");
         inputData[key] = lines;
     });
-    return intentUtteranceGenerator(inputData).toString();
+    callback(intentUtteranceGenerator(inputData));
 }
 
 

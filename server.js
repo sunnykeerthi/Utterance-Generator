@@ -9,12 +9,14 @@ var processing = require('./app/routes/process');
 
 app.post('/notes', bodyParser, (req, res) => {
     console.log(req.body);
-    fs.writeFile("test.txt", processing.inputFromFrontEnd(req.body), function (data, err) {
+    /*fs.writeFile("test.txt", processing.inputFromFrontEnd(req.body), function (data, err) {
         if (err) {
             return console.log(err);
         }
-        res.send(req.body);
-    })
+        console.log(data)
+        res.send(data);
+    })*/
+    res.send(processing.inputFromFrontEnd(req.body));
 });
 
 app.listen(port, () => {
