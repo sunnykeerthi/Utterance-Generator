@@ -8,7 +8,7 @@ var processing = require('./app/routes/process');
 
 
 app.post('/notes', bodyParser, (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     /*fs.writeFile("test.txt", processing.inputFromFrontEnd(req.body), function (data, err) {
         if (err) {
             return console.log(err);
@@ -16,7 +16,11 @@ app.post('/notes', bodyParser, (req, res) => {
         console.log(data)
         res.send(data);
     })*/
-    res.send(processing.inputFromFrontEnd(req.body));
+    // console.log(processing.inputFromFrontEnd(req.body).size())
+    //var jsnResArr = [];
+    //jsnResArr.push({ 'new': [processing.inputFromFrontEnd(req.body)] });
+
+    res.send({ 'new': processing.inputFromFrontEnd(req.body) });
 });
 
 app.listen(port, () => {

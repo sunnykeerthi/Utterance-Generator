@@ -100,7 +100,7 @@ intentUtteranceExpander = function (originalPhrase) {
 
 
 intentUtteranceGenerator = function (intents) {
-    var utterancesCollection = '';
+    var utterancesCollection = [];
 
     if (!(intents instanceof Object) || Array.isArray(intents)) {
         return (utterancesCollection);
@@ -114,20 +114,20 @@ intentUtteranceGenerator = function (intents) {
 
         if (Array.isArray(lines)) {
             var collection = lines.map(function (line) {
-                return expand(intent, line);
+                return expand(line);
             });
-
-            utterancesCollection += (collection.join('') + '\n');
+            utterancesCollection.push(collection.join(''));
         } else if (typeof lines === 'string') {
-            utterancesCollection += (expand(intent, lines) + '\n');
+            utterancesCollection.push(expand(lines));
         }
     }
 
-    function expand(intent, line) {
+    function expand(line) {
+        console.log(line);
         var intentUtterances = intentUtteranceExpander(line).reduce(function (intentUtterance, phrase) {
             var utterance = phrase;
-            return intentUtterance += (utterance + '\n');
-        }, '');
+            utterancesCollection.push(utterance);
+        });
 
         return intentUtterances;
     }
@@ -136,21 +136,13 @@ intentUtteranceGenerator = function (intents) {
 }
 
 
-
-
-
-
-
-
-
-module.exports.inputFromFrontEnd = function (inpData) {
-    console.log('Exportes' + inpData);
+module.exports.inputFromFrontEnd = function (inpData, callback) {
     var inputData = inpData;
     intents.forEach((value, key) => {
         var lines = value.split("\n");
         inputData[key] = lines;
     });
-    return intentUtteranceGenerator(inputData).toString();
+    return (intentUtteranceGenerator(inputData));
 }
 
 

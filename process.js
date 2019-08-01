@@ -117,9 +117,9 @@ intentUtteranceGenerator = function (intents) {
                 return expand(intent, line);
             });
 
-            utterancesCollection += (collection.join('') + '\n');
+            utterancesCollection += (collection.join(''));
         } else if (typeof lines === 'string') {
-            utterancesCollection += (expand(intent, lines) + '\n');
+            utterancesCollection += (expand(intent, lines));
         }
     }
 
