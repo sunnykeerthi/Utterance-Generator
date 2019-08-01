@@ -123,14 +123,13 @@ intentUtteranceGenerator = function (intents) {
     }
 
     function expand(line) {
-        console.log(line);
         var intentUtterances = intentUtteranceExpander(line).reduce(function (intentUtterance, phrase) {
             var utterance = phrase;
             utterancesCollection.push(utterance);
-        });
-
-        return intentUtterances;
+        }, []);
     }
+    utterancesCollection = utterancesCollection.filter(function (x) { return x !== undefined });
+    console.log(utterancesCollection);
 
     return (utterancesCollection);
 }
