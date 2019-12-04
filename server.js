@@ -20,7 +20,12 @@ app.post('/notes', bodyParser, (req, res) => {
     //var jsnResArr = [];
     //jsnResArr.push({ 'new': [processing.inputFromFrontEnd(req.body)] });
 
-    res.send({ 'new': processing.inputFromFrontEnd(req.body) });
+    // res.send({ 'new': processing.inputFromFrontEnd(req.body) });
+
+    var jsnResArr = [];
+    jsnResArr.push({
+        'new': [processing.inputFromFrontEnd(req.body)]
+    });
 });
 
 app.listen(port, () => {

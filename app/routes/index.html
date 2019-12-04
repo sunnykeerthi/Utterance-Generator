@@ -32,8 +32,6 @@
                         var replaceComma = this.value.replace(/,/g, '|');
                         var replaceSpace = replaceComma.replace(/\s+/g, '');
                         res = res + "(" + replaceSpace + ") ";
-
-
                     });
                     res = res.replace(/\s+$/, '');
                     jsonArr.push({
@@ -50,8 +48,6 @@
                         success: function (respn) {
                             console.log(respn);
                         },
-
-
                     })
                 }
             });
