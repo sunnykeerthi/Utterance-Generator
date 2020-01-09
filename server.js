@@ -5,7 +5,7 @@ var bodyParser = require('body-parser').json();
 var fs = require('fs');
 var processing = require('./app/routes/process');
 
-
+//git diff HEAD FETCH_HEAD
 
 app.post('/notes', bodyParser, (req, res) => {
     res.send({
