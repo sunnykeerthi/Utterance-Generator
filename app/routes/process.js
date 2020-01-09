@@ -1,11 +1,6 @@
 var fs = require('fs');
 var intents = new Map();
 
-///node_modules
-// npm-debug.log
-// .DS_Store
-// process1.js
-// /*.env
 
 intentUtteranceExpander = function (originalPhrase) {
     if (Array.isArray(originalPhrase)) {
@@ -19,7 +14,6 @@ intentUtteranceExpander = function (originalPhrase) {
     const wordsInsideExpandSlotRegex = /([^||()]+)/gi;
     const wordsInsideSlotRegex = /\{\((.*)\).*\|.*\}/i;
     const insideParensRegex = /\(.*\)/i;
-
     function expand(phrase) {
         if (typeof phrase !== 'string') {
             return [];
