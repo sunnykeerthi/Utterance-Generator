@@ -4,13 +4,9 @@ const port = process.env.PORT || 8080;
 var bodyParser = require('body-parser').json();
 var fs = require('fs');
 var processing = require('./app/routes/process');
-
+var cors = require('cors');
 //git diff HEAD FETCH_HEAD
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.use(cors());
 app.post('/notes', bodyParser, (req, res) => {
     res.send({
         'new': processing.inputFromFrontEnd(req.body)
