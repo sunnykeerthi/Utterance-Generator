@@ -8,6 +8,7 @@ var cors = require('cors');
 //git diff HEAD FETCH_HEAD
 app.use(cors());
 app.post('/notes', bodyParser, (req, res) => {
+    console.log('JSON.stringify(req.body)');
     console.log(JSON.stringify(req.body));
     res.send({
         'new': processing.inputFromFrontEnd(req.body)
